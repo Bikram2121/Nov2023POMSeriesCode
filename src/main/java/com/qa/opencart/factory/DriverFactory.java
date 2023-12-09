@@ -70,13 +70,13 @@ public class DriverFactory {
 			// driver = new FirefoxDriver(optionsManager.getFirefoxOptions());
 			tlDriver.set(new FirefoxDriver(optionsManager.getFirefoxOptions()));
 		} else {
-			System.out.println("please pass the correct browser...." + browserName);
+			System.out.println("please pass the correct browser name...." + browserName);
 			throw new FrameworkException("WRONG BROWSER IS PASSED...");
 		}
 
 		getDriver().manage().deleteAllCookies();
 		getDriver().manage().window().maximize();
-		getDriver().get(prop.getProperty("url"));
+		getDriver().get(prop.getProperty("url").trim());
 		return getDriver();
 
 	}
