@@ -5,7 +5,7 @@ import org.openqa.selenium.By;
 public class Mail {
 
 	public void sendMail(){
-    System.out.println("mail sent");
+    System.out.println("mail sent --Bikram");
   }
 
   
