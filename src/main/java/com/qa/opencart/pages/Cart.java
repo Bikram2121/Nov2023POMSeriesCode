@@ -8,4 +8,6 @@ public class Cart {
 
 	int p = 10;
 
+	int h = 16;
+
 }
