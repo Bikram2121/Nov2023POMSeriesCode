@@ -1,52 +1,108 @@
-pipeline{
+pipeline 
+{
+    agent any
     
-    agent any 
-    
-    stages{
-        
-        stage("Build"){
-        steps{
-            echo("build the project")
-            }
+    tools{
+    	maven 'maven'
         }
-        stage("Deploy to dev"){
-        steps{
-            echo("deploying to dev env")
+
+    stages 
+    {
+        stage('Build') 
+        {
+            steps
+            {
+                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
-        }
-        
-         stage("Deploy to qa"){
-        steps{
-            echo("deploying to qa env")
-            }
-        }
-        
-         stage("Run regression automation test cases"){
-        steps{
-            echo("Run regression automation test cases")
+            post 
+            {
+                success
+                {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
             }
         }
         
         
-        stage("Deploy to stage"){
-        steps{
-            echo("deploying to stage env")
+        
+        stage("Deploy to QA"){
+            steps{
+                echo("deploy to qa")
             }
         }
         
-         stage("Run sanity automation test cases"){
-        steps{
-            echo("Run sanity automation test cases")
+        
+                
+        stage('Regression Automation Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/Bikram2121/Nov2023POMSeriesCode'
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_regression.xml"
+                    
+                }
+            }
+        }
+                
+     
+        stage('Publish Allure Reports') {
+           steps {
+                script {
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: '/allure-results']]
+                    ])
+                }
             }
         }
         
-         stage("Deploy to prod"){
-        steps{
-            echo("deploying to prod env")
+        
+        stage('Publish Extent Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false, 
+                                  keepAll: true, 
+                                  reportDir: 'reports', 
+                                  reportFiles: 'TestExecutionReport.html', 
+                                  reportName: 'HTML Regression Extent Report', 
+                                  reportTitles: ''])
+            }
+        }
+        
+        stage("Deploy to Stage"){
+            steps{
+                echo("deploy to Stage")
+            }
+        }
+        
+        stage('Sanity Automation Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/Bikram2121/Nov2023POMSeriesCode'
+                    sh "mvn clean test -Dsurefire.suiteXmlFiles=src/test/resources/testrunners/testng_sanity.xml"
+                    
+                }
+            }
+        }
+        
+        
+        
+        stage('Publish sanity Extent Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false, 
+                                  keepAll: true, 
+                                  reportDir: 'reports', 
+                                  reportFiles: 'TestExecutionReport.html', 
+                                  reportName: 'HTML Sanity Extent Report', 
+                                  reportTitles: ''])
             }
         }
         
         
     }
-    
 }
