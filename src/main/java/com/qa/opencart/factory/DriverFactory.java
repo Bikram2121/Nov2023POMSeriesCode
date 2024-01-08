@@ -37,7 +37,7 @@ public class DriverFactory {
 	 * @return this returns the driver
 	 */
 
-	public WebDriver intiDriver(Properties prop) {
+	public WebDriver initDriver(Properties prop) {
 		optionsManager = new OptionsManager(prop);
 		highlight = prop.getProperty("highlight").trim();
 
@@ -81,12 +81,23 @@ public class DriverFactory {
 		} else if (browserName.equalsIgnoreCase("firefox")) {
 
 			if (Boolean.parseBoolean(prop.getProperty("remote"))) {
-				// reun at the remote/grid:
+				// run at the remote/grid:
 
 				init_remoteDriver("firefox");
 			} else {
 				// local execution
 				tlDriver.set(new FirefoxDriver(optionsManager.getFirefoxOptions()));
+			}
+
+		} else if (browserName.equalsIgnoreCase("chrome")) {
+
+			if (Boolean.parseBoolean(prop.getProperty("remote"))) {
+				// run at the remote/grid:
+
+				init_remoteDriver("chrome");
+			} else {
+				// local execution
+				tlDriver.set(new ChromeDriver(optionsManager.getChromeOptions()));
 			}
 
 		} else {
@@ -114,8 +125,9 @@ public class DriverFactory {
 
 		try {
 			switch (browser.toLowerCase()) {
-			case "edge":
-				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionsManager.getEdgeOptions()));
+			case "chrome":
+				tlDriver.set(
+						new RemoteWebDriver(new URL(prop.getProperty("huburl")), optionsManager.getChromeOptions()));
 				break;
 			case "firefox":
 				tlDriver.set(
