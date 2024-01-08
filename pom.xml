@@ -13,7 +13,6 @@
 		<extentreports-version>5.0.8</extentreports-version>
 		<allure.version>2.24.0</allure.version>
 		<aspectj.version>1.9.5</aspectj.version>
-		<suiteXmlFile>src/test/resources/testrunners/testng_regression.xml</suiteXmlFile>
 	</properties>
 
 
@@ -124,8 +123,9 @@
 					<reuseForks>true</reuseForks>
 					<argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
 					<suiteXmlFiles>
-						<!--<suiteXmlFile>src/test/resources/testrunners/testng_regression.xml</suiteXmlFile>-->
-						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>${suiteXmlFile}>
+						<suiteXmlFile>
+							src/test/resources/testrunners/testng_regression.xml</suiteXmlFile>
+						<!--<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>-->
 					</suiteXmlFiles>
 
 					<argLine>
