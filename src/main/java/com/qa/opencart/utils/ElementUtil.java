@@ -3,7 +3,6 @@ package com.qa.opencart.utils;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -12,7 +11,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -25,7 +23,7 @@ import com.qa.opencart.factory.DriverFactory;
 public class ElementUtil {
 	private WebDriver driver;
 	private JavaScriptUtil jsUtil;
-	private Properties prop;
+	// private Properties prop;
 
 	public ElementUtil(WebDriver driver) {
 		this.driver = driver;
@@ -213,7 +211,7 @@ public class ElementUtil {
 	 */
 	public WebElement waitForElementVisible(By locator, int timeOut) {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOut));
-		
+
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 

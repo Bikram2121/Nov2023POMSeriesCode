@@ -2,6 +2,7 @@ package com.qa.opencart.tests;
 
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
@@ -12,6 +13,8 @@ import com.qa.opencart.constants.AppConstants;
 import com.qa.opencart.utils.ExcelUtil;
 
 public class ProductPageInfoTest extends BaseTest {
+	
+	private final Logger logger = Logger.getLogger(ProductPageInfoTest.class);
 
 	@BeforeClass
 	public void productPageInfoSetup() {
