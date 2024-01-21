@@ -27,9 +27,9 @@
 		</classes>
 	</test>
 
-	<test name="Login Page Test_firefox_57.0">
+	<test name="Login Page Test_firefox_83.0">
 		<parameter name="browser" value="firefox" />
-		<parameter name="browserversion" value="57.0" />
+		<parameter name="browserversion" value="83.0" />
 		<parameter name="testcasename" value="Login Page Test" />
 		<classes>
 			<class name="com.qa.opencart.tests.LoginPageTest" />
