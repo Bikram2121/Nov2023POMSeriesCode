@@ -60,11 +60,11 @@ public class OptionsManager {
 	public FirefoxOptions getFirefoxOptions() {
 		fo = new FirefoxOptions();
 		if (Boolean.parseBoolean(prop.getProperty("remote"))) {
-			co.setBrowserVersion(prop.getProperty("browserversion"));
-			selenoidOptions.put("browsername", "chrome");
+			fo.setBrowserVersion(prop.getProperty("browserversion"));
+			selenoidOptions.put("browsername", "firefox");
 			selenoidOptions.put("enableVNC", true);
 			selenoidOptions.put("name", prop.getProperty("testcasename"));
-			co.setCapability("selenoid:options", selenoidOptions);
+			fo.setCapability("selenoid:options", selenoidOptions);
 		}
 		if (Boolean.parseBoolean(prop.getProperty("headless").trim())) {
 			System.out.println("============Running firefox in headless===========");
