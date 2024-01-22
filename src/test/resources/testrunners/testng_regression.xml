@@ -18,14 +18,14 @@
 		</classes>
 	</test>
 
-	<!--	<test name="Accounts Page Test_chrome_79.0">
+	<test name="Accounts Page Test_chrome_116.0">
 		<parameter name="browser" value="chrome" />
-		<parameter name="browserversion" value="79.0" />
+		<parameter name="browserversion" value="116.0" />
 		<parameter name="testcasename" value="Accounts Page Test" />
 		<classes>
 			<class name="com.qa.opencart.tests.AccountsPageTest" />
 		</classes>
-	</test>-->
+	</test>
 
 	<test name="Login Page Test_firefox_120.0">
 		<parameter name="browser" value="firefox" />
@@ -35,5 +35,15 @@
 			<class name="com.qa.opencart.tests.LoginPageTest" />
 		</classes>
 	</test>
+
+	<test name="Accounts Page Test_firefox_117.0">
+		<parameter name="browser" value="firefox" />
+		<parameter name="browserversion" value="117.0" />
+		<parameter name="testcasename" value="Accounts Page Test" />
+		<classes>
+			<class name="com.qa.opencart.tests.AccountsPageTest" />
+		</classes>
+	</test>
+
 
 </suite>
