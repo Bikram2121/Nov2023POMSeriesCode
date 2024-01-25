@@ -26,6 +26,7 @@ public class ProductInfoPage {
 	private By quantity = By.id("input-quantity");
 	private By addToCartBtn = By.id("button-cart");
 	private By cartSuccessMsg = By.cssSelector("div.alert.alert-success");
+	private By cart = By.id("cart-total");
 
 	private Map<String, String> productInfoMap;
 
@@ -111,6 +112,12 @@ public class ProductInfoPage {
 		String extaxVal = exTax.split(":")[1].trim();
 		productInfoMap.put("productprice", price);
 		productInfoMap.put("exTax", extaxVal);
+	}
+
+	public ViewCartPopUpPage openCart() {
+		eleUtil.doClick(cart);
+		return new ViewCartPopUpPage(driver);
+
 	}
 
 }

@@ -14,6 +14,7 @@ import com.qa.opencart.pages.LoginPage;
 import com.qa.opencart.pages.ProductInfoPage;
 import com.qa.opencart.pages.RegistrationPage;
 import com.qa.opencart.pages.SearchPage;
+import com.qa.opencart.pages.ViewCartPopUpPage;
 
 public class BaseTest {
 
@@ -25,6 +26,7 @@ public class BaseTest {
 	protected SearchPage searchPage;
 	protected ProductInfoPage productInfoPage;
 	protected RegistrationPage registrationPage;
+	protected ViewCartPopUpPage viewCartPopUpPage;
 
 	protected SoftAssert softAssert;
 

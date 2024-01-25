@@ -1,5 +1,7 @@
 package com.qa.opencart.tests;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -10,10 +12,13 @@ import org.testng.annotations.Test;
 
 import com.qa.opencart.base.BaseTest;
 import com.qa.opencart.constants.AppConstants;
+import com.qa.opencart.pages.ViewCartPopUpPage;
 import com.qa.opencart.utils.ExcelUtil;
 
 public class ProductPageInfoTest extends BaseTest {
-	
+
+	ArrayList<String> expProdListInCart;
+
 	private final Logger logger = Logger.getLogger(ProductPageInfoTest.class);
 
 	@BeforeClass
@@ -100,10 +105,24 @@ public class ProductPageInfoTest extends BaseTest {
 		productInfoPage = searchPage.selectProduct(productName);
 		productInfoPage.enterQuantity(qty);
 		String actCartMsg = productInfoPage.addProductToCart();
+		// success : you have added MacBook pro to your shopping cart
 		softAssert.assertTrue(actCartMsg.contains(cartSuccessMsg));
 		softAssert.assertTrue(actCartMsg.contains(productName));
 		softAssert.assertEquals(actCartMsg,
 				"" + cartSuccessMsg + ": You have added " + productName + " to your shopping cart!");
+
+		// Checking cart details as well:
+
+		viewCartPopUpPage = productInfoPage.openCart();
+		List<String> cartProdList = viewCartPopUpPage.getProductsValueListInCart();
+		Object[][] data = addToCartTestData();
+		expProdListInCart = new ArrayList<String>();
+		for (int i = 0; i < data.length; i++) {
+			expProdListInCart.add(data[i][1].toString());
+
+		}
+		logger.info("expected product list in cart is : " + expProdListInCart);
+		softAssert.assertTrue(expProdListInCart.containsAll(cartProdList));
 		softAssert.assertAll();
 	}
 
