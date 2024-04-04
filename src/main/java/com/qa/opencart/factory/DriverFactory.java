@@ -140,7 +140,6 @@ public class DriverFactory {
 			e.printStackTrace();
 		}
 	}
-	
 
 	/**
 	 * get the local thread copy of the driver
